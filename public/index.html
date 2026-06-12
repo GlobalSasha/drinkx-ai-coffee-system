@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#11151b" />
+    <title>DrinkX AI Coffee System</title>
+    <link rel="stylesheet" href="/concept.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <div class="ambient ambient-three" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <main class="app" id="app" data-screen="intro">
+      <header class="topbar">
+        <button class="brand" id="brandButton" type="button" aria-label="На главный экран">
+          <span class="brand-mark">X</span>
+          <span>
+            <strong>DrinkX</strong>
+            <small>AI Coffee System</small>
+          </span>
+        </button>
+        <div class="system-status">
+          <span class="status-dot"></span>
+          <span>System online</span>
+        </div>
+      </header>
+
+      <section class="screen intro-screen" aria-labelledby="introTitle">
+        <div class="intro-orbit" aria-hidden="true">
+          <span class="intro-bubble intro-bubble-a"></span>
+          <span class="intro-bubble intro-bubble-b"></span>
+          <span class="intro-bubble intro-bubble-c"></span>
+          <div class="intro-core">
+            <span>DX</span>
+          </div>
+        </div>
+
+        <div class="intro-copy">
+          <p class="eyebrow">Personal drink interface</p>
+          <h1 id="introTitle">DrinkX<br />AI Coffee System</h1>
+          <p class="intro-text">
+            Напитки, которые движутся навстречу твоему вкусу.
+          </p>
+          <button class="action action-primary action-start" id="startButton" type="button">
+            <span>Start</span>
+            <span class="action-arrow">↗</span>
+          </button>
+        </div>
+
+        <div class="intro-meta">
+          <span>01 / Explore</span>
+          <span>02 / Customize</span>
+          <span>03 / Enjoy</span>
+        </div>
+      </section>
+
+      <section class="screen menu-screen" aria-labelledby="menuTitle">
+        <header class="menu-header">
+          <div>
+            <p class="eyebrow">Choose your molecule</p>
+            <h2 id="menuTitle">Что приготовим?</h2>
+          </div>
+          <button class="voice-pill" id="voiceButton" type="button">
+            <span class="voice-wave" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>Сказать голосом</span>
+          </button>
+        </header>
+
+        <nav class="category-filter" id="categoryFilter" aria-label="Категории напитков">
+          <button class="filter-button is-active" type="button" data-category="all">Все</button>
+          <button class="filter-button" type="button" data-category="classic">Классика</button>
+          <button class="filter-button" type="button" data-category="coffee">Кофе</button>
+          <button class="filter-button" type="button" data-category="tea">Чай</button>
+          <button class="filter-button" type="button" data-category="cold">Холодные</button>
+          <button class="filter-button" type="button" data-category="signature">Авторские</button>
+        </nav>
+
+        <div class="bubble-field" id="bubbleField" aria-label="Живое меню напитков">
+        </div>
+
+        <footer class="menu-footer">
+          <span id="drinkCount">12 напитков в движении</span>
+          <span>Tap a bubble to explore</span>
+        </footer>
+      </section>
+
+      <section class="screen upsell-screen" aria-labelledby="upsellTitle">
+        <button class="round-button upsell-back" id="upsellBackButton" type="button" aria-label="Вернуться к меню">
+          ←
+        </button>
+
+        <div class="upsell-layout">
+          <header class="upsell-copy">
+            <div class="ai-badge">
+              <span class="ai-badge-core">AI</span>
+              <span>
+                <strong>AI Barista</strong>
+                <small id="upsellContext">Персональная рекомендация</small>
+              </span>
+            </div>
+            <p class="eyebrow">Я заметил твой выбор</p>
+            <h2 id="upsellTitle">Можно предложить кое-что особенное?</h2>
+            <p id="upsellMessage"></p>
+          </header>
+
+          <div class="upsell-comparison">
+            <article class="upsell-card upsell-current">
+              <span class="upsell-card-label">Твой выбор</span>
+              <div class="upsell-drink-visual">
+                <img id="upsellCurrentImage" src="" alt="" />
+              </div>
+              <div>
+                <h3 id="upsellCurrentName"></h3>
+                <span id="upsellCurrentPrice"></span>
+              </div>
+            </article>
+
+            <span class="upsell-arrow" aria-hidden="true">→</span>
+
+            <article class="upsell-card upsell-recommended">
+              <span class="upsell-card-label">Чаще выбирают сейчас</span>
+              <div class="upsell-drink-visual">
+                <span class="upsell-popular">AI choice</span>
+                <img id="upsellRecommendedImage" src="" alt="" />
+              </div>
+              <div>
+                <h3 id="upsellRecommendedName"></h3>
+                <span id="upsellRecommendedPrice"></span>
+              </div>
+              <div class="upsell-tags" id="upsellTags"></div>
+            </article>
+          </div>
+
+          <div class="upsell-actions">
+            <button class="action action-primary" id="acceptUpsellButton" type="button">
+              <span>Попробовать рекомендацию</span>
+              <span class="action-arrow">↗</span>
+            </button>
+            <button class="text-button upsell-decline" id="declineUpsellButton" type="button">
+              Оставить мой выбор
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen detail-screen" aria-labelledby="detailTitle">
+        <button class="round-button detail-back" id="detailBackButton" type="button" aria-label="Вернуться к меню">
+          ←
+        </button>
+
+        <div class="detail-layout">
+          <div class="detail-visual">
+            <div class="hero-bubble">
+              <span class="hero-glare" aria-hidden="true"></span>
+              <img id="detailImage" src="" alt="" />
+              <span class="hero-index" id="detailIndex">01</span>
+            </div>
+            <div class="flavour-tags" id="flavourTags"></div>
+          </div>
+
+          <article class="detail-panel">
+            <header class="detail-heading">
+              <div>
+                <p class="eyebrow" id="detailType">Signature coffee</p>
+                <h2 id="detailTitle">Название напитка</h2>
+              </div>
+              <div class="price" id="detailPrice">390 ₽</div>
+            </header>
+
+            <p class="detail-description" id="detailDescription"></p>
+
+            <section class="nutrition" aria-label="Пищевая ценность">
+              <header>
+                <span>КБЖУ</span>
+                <small>Демо-данные · текущая порция</small>
+              </header>
+              <div class="nutrition-grid">
+                <div><strong id="nutritionKcal">185</strong><span>ккал</span></div>
+                <div><strong id="nutritionProtein">4.2</strong><span>белки</span></div>
+                <div><strong id="nutritionFat">6.1</strong><span>жиры</span></div>
+                <div><strong id="nutritionCarbs">28</strong><span>углеводы</span></div>
+              </div>
+            </section>
+
+            <div class="customizer">
+              <section class="option-group">
+                <div class="option-label">
+                  <span>Размер</span>
+                  <output id="volumeOutput">350 мл</output>
+                </div>
+                <div class="segmented" id="sizeOptions">
+                  <button type="button" data-size="S">S</button>
+                  <button class="is-selected" type="button" data-size="M">M</button>
+                  <button type="button" data-size="L">L</button>
+                </div>
+              </section>
+
+              <section class="option-group" id="milkGroup">
+                <div class="option-label">
+                  <span>Молоко</span>
+                  <output id="milkOutput">Обычное</output>
+                </div>
+                <div class="choice-row" id="milkOptions">
+                  <button class="is-selected" type="button" data-milk="Обычное">Обычное</button>
+                  <button type="button" data-milk="Овсяное">Овсяное</button>
+                  <button type="button" data-milk="Миндальное">Миндальное</button>
+                  <button type="button" data-milk="Кокосовое">Кокосовое</button>
+                </div>
+              </section>
+
+              <section class="option-group" id="syrupGroup" hidden>
+                <div class="option-label">
+                  <span>Сироп · 9 вкусов</span>
+                  <output id="syrupOutput">Без сиропа</output>
+                </div>
+                <div class="choice-grid" id="syrupOptions">
+                  <button class="is-selected is-none" type="button" data-syrup="Без сиропа">Без сиропа</button>
+                  <button type="button" data-syrup="Ваниль">Ваниль</button>
+                  <button type="button" data-syrup="Карамель">Карамель</button>
+                  <button type="button" data-syrup="Лесной орех">Лесной орех</button>
+                  <button type="button" data-syrup="Шоколад">Шоколад</button>
+                  <button type="button" data-syrup="Кокос">Кокос</button>
+                  <button type="button" data-syrup="Мята">Мята</button>
+                  <button type="button" data-syrup="Клубника">Клубника</button>
+                  <button type="button" data-syrup="Банан">Банан</button>
+                  <button type="button" data-syrup="Лаванда">Лаванда</button>
+                </div>
+              </section>
+
+              <section class="option-group" id="strengthGroup" hidden>
+                <div class="option-label">
+                  <span>Крепость</span>
+                  <output id="strengthOutput">Средняя</output>
+                </div>
+                <div class="segmented" id="strengthOptions">
+                  <button type="button" data-strength="Мягкая">Мягкая</button>
+                  <button class="is-selected" type="button" data-strength="Средняя">Средняя</button>
+                  <button type="button" data-strength="Крепкая">Крепкая</button>
+                </div>
+              </section>
+
+              <section class="option-group" id="sweetnessGroup">
+                <div class="option-label">
+                  <span>Сладость</span>
+                  <output id="sweetnessOutput">Средняя</output>
+                </div>
+                <input id="sweetnessRange" type="range" min="0" max="3" value="1" step="1" />
+                <div class="range-labels" aria-hidden="true">
+                  <span>0</span><span>1</span><span>2</span><span>3</span>
+                </div>
+              </section>
+            </div>
+
+            <button class="action action-primary order-action" id="orderButton" type="button">
+              <span>Приготовить</span>
+              <span id="orderPrice">390 ₽</span>
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <section class="screen prep-screen" aria-labelledby="prepTitle">
+        <header class="prep-heading">
+          <div>
+            <p class="eyebrow">Drink synthesis in progress</p>
+            <h2 id="prepTitle">Создаём твой напиток</h2>
+          </div>
+          <div class="prep-timer">
+            <span id="timerValue">00:45</span>
+            <small>до готовности</small>
+          </div>
+        </header>
+
+        <div class="prep-layout">
+          <div class="synthesis">
+            <div class="synthesis-ring synthesis-ring-one" aria-hidden="true"></div>
+            <div class="synthesis-ring synthesis-ring-two" aria-hidden="true"></div>
+            <div class="ingredient-orbit" id="ingredientOrbit" aria-hidden="true"></div>
+            <div class="synthesis-core">
+              <img id="prepImage" src="" alt="" />
+              <span class="core-scan"></span>
+            </div>
+            <div class="progress-orbit" id="progressOrbit"></div>
+          </div>
+
+          <aside class="prep-info">
+            <div class="stage-card">
+              <span class="stage-number" id="stageNumber">01</span>
+              <div>
+                <small>Текущий этап</small>
+                <strong id="stageTitle">Подготовка основы</strong>
+                <p id="stageDescription">Система калибрует рецепт под выбранный объём.</p>
+              </div>
+            </div>
+
+            <div class="stage-list" id="stageList">
+              <div class="is-active"><span></span>Подготовка основы</div>
+              <div><span></span>Соединение вкусов</div>
+              <div><span></span>Создание текстуры</div>
+              <div><span></span>Финальный баланс</div>
+            </div>
+
+            <div class="fact-bubble" id="factBubble">
+              <small>AI Barista говорит</small>
+              <p id="factText">Каждый параметр рецепта проверяется в реальном времени.</p>
+            </div>
+
+            <button class="text-button" id="finishDemoButton" type="button">Завершить демо →</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen ready-screen" aria-labelledby="readyTitle">
+        <div class="ready-visual">
+          <div class="ready-halo" aria-hidden="true"></div>
+          <div class="ready-bubble">
+            <img id="readyImage" src="" alt="" />
+            <span class="ready-check">✓</span>
+          </div>
+        </div>
+
+        <div class="ready-copy">
+          <p class="eyebrow">Synthesis complete</p>
+          <h2 id="readyTitle">Твой напиток готов</h2>
+          <p id="readyDescription">Забери его в зоне выдачи DrinkX.</p>
+          <div class="ready-order" id="readyOrder"></div>
+          <button class="action action-primary" id="newOrderButton" type="button">
+            <span>Новый заказ</span>
+            <span class="action-arrow">↗</span>
+          </button>
+        </div>
+      </section>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+
+    <script src="/concept.js" type="module"></script>
+  </body>
+</html>
