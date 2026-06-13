@@ -370,7 +370,7 @@ function renderDrinkDetails() {
   const factor = sizeConfig[state.size].nutrition;
   const nutrition = drink.nutrition.map((value) => Math.round(value * factor * 10) / 10);
 
-  elements.detailImage.src = `/assets/drinks/${drink.image}`;
+  elements.detailImage.src = `./assets/drinks/${drink.image}`;
   elements.detailImage.alt = drink.name;
   elements.detailIndex.textContent = String(index).padStart(2, "0");
   elements.detailType.textContent = drink.type;
@@ -505,11 +505,11 @@ function showUpsell(drink) {
   elements.upsellContext.textContent = context.label;
   elements.upsellMessage.textContent =
     `Я вижу, ты выбрал ${drink.name}. ${context.reason} Может, сегодня попробуем ${recommended.name}?`;
-  elements.upsellCurrentImage.src = `/assets/drinks/${drink.image}`;
+  elements.upsellCurrentImage.src = `./assets/drinks/${drink.image}`;
   elements.upsellCurrentImage.alt = drink.name;
   elements.upsellCurrentName.textContent = drink.name;
   elements.upsellCurrentPrice.textContent = formatPrice(drink.price);
-  elements.upsellRecommendedImage.src = `/assets/drinks/${recommended.image}`;
+  elements.upsellRecommendedImage.src = `./assets/drinks/${recommended.image}`;
   elements.upsellRecommendedImage.alt = recommended.name;
   elements.upsellRecommendedName.textContent = recommended.name;
   elements.upsellRecommendedPrice.textContent =
@@ -578,7 +578,7 @@ function createBubbles() {
     element.style.setProperty("--tint", drink.tint);
     element.setAttribute("aria-label", `${drink.name}. Открыть напиток`);
     element.innerHTML = `
-      <img src="/assets/drinks/${drink.image}" alt="" />
+      <img src="./assets/drinks/${drink.image}" alt="" />
       <span class="drink-bubble-label">${drink.name}</span>
     `;
     element.addEventListener("click", () => selectDrink(drink, element));
@@ -786,9 +786,9 @@ function updatePreparation() {
 function startPreparation() {
   clearInterval(state.preparationTimer);
   state.secondsLeft = prepDuration;
-  elements.prepImage.src = `/assets/drinks/${state.selectedDrink.image}`;
+  elements.prepImage.src = `./assets/drinks/${state.selectedDrink.image}`;
   elements.prepImage.alt = state.selectedDrink.name;
-  elements.readyImage.src = `/assets/drinks/${state.selectedDrink.image}`;
+  elements.readyImage.src = `./assets/drinks/${state.selectedDrink.image}`;
   elements.readyImage.alt = state.selectedDrink.name;
   renderIngredients();
   updatePreparation();
